@@ -245,7 +245,7 @@ Status LonController::ComputeControlCommand(
   double acceleration_cmd_closeloop = 0.0;
 
   acceleration_cmd_closeloop =
-      common::math::Clamp(speed_controller_input, -speed_controller_input_limit,speed_controller_input_limit);
+       speed_pid_controller_.Control(speed_controller_input_limited, ts);
   debug->set_pid_saturation_status(
       speed_pid_controller_.IntegratorSaturationStatus());
   if (enable_leadlag) {
